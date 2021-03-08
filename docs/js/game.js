@@ -1,7 +1,3 @@
-window.onload = function() {
-	console.log('hi');
-}
-
 let inventory = {
 	items: {
 		gears: 0,
@@ -16,24 +12,51 @@ let inventory = {
 	},
 };
 
-let interval = setInterval(tick, 100);
-
-const recipies = {
-	factory: {
-		gears: 100, nuts: 20, bolts: 20, time: 10,
+let recipes = {
+	factories: {
+		gears: 100, nuts: 20, bolts: 20, time: 5,
 	},
 };
 
 function tick() {
-	inventory.items.gears += inventory.buildings.factories;
+	inventory.items.gears += 2*inventory.buildings.factories;
+	inventory.items.nuts += inventory.buildings.factories;
+	inventory.items.bolts += inventory.buildings.factories;
 	display();
 }
 
 function display() {
-	for(let key in inventory.items) {
-		document.getElementById(key).innerText = inventory.items[key];
-	}
-	for(let key in inventory.buildings) {
-		document.getElementById(key).innerText = inventory.buildings[key];
+	for(let category in inventory) {
+		for(let key in inventory[category]) {
+			document.getElementById(key).innerText = inventory[category][key];
+		}
 	}
 }
+
+function craft(building) {
+	if(!can_craft(building)) return;
+	for(let item in recipes[building]) {
+		if(item=='time') continue;
+		inventory.items[item] -= recipes[building][item];
+	}
+	setTimeout(()=> inventory.buildings[building] += 1, recipes[building].time*1000);
+}
+
+function can_craft(building) {
+	for(let item in recipes[building]) {
+		if(item=='time') continue;
+		if(inventory.items[item] < recipes[building][item]) return false;
+	}
+	return true;
+}
+
+function setup() {
+	let interval = setInterval(tick, 250);
+
+	let html = '';
+	for(let building in inventory.buildings) {
+		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
+	}
+	document.getElementById('controls').innerHTML = html;
+}
+window.onload = setup;
