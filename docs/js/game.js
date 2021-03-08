@@ -14,7 +14,9 @@ let inventory = {
 		crafters: 0,
 		converters: 0,
 	},
-}
+};
+
+let interval = setInterval(tick, 100);
 
 const recipies = {
 	factory: {
@@ -22,24 +24,16 @@ const recipies = {
 	},
 };
 
-function setup () {
-
-	return {
-		interval: null,
-		get items() {
-			return inventory.items;
-		},
-		get buildings() {
-			return inventory.buildings;
-		},
-		tick: function() {
-			inventory.items.gears += inventory.buildings.factories;
-		},
-		start: function() {
-			console.log(this.tick);
-			interval = setInterval(this.tick, 100);
-		},
-	};
+function tick() {
+	inventory.items.gears += inventory.buildings.factories;
+	display();
 }
 
-// tick();
+function display() {
+	for(let key in inventory.items) {
+		document.getElementById(key).innerText = inventory.items[key];
+	}
+	for(let key in inventory.buildings) {
+		document.getElementById(key).innerText = inventory.buildings[key];
+	}
+}

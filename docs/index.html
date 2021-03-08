@@ -14,25 +14,22 @@
 	<meta name="apple-mobile-web-app-status-bar" content="#A1A1AA">
 	<meta name="theme-color" content="#A1A1AA">
 
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
-
 	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/scripts.js"></script>
 	<script src="js/game.js"></script>
 </head>
 <body class="text-center m-2 text-gray-900">
-	<section x-data="setup()">
+	<section>
 		<h1>Gears</h1>
-		<button @click="start">Start</button>
 		<h3>Items</h3>
-		Gears: <span x-text="items.gears"></span>
-		Nuts: <span x-text="items.nuts"></span>
-		Bolts: <span x-text="items.bolts"></span>
-		Screws: <span x-text="items.screws"></span>
+		Gears: <span id="gears"></span>
+		Nuts: <span id="nuts"></span>
+		Bolts: <span id="bolts"></span>
+		Screws: <span id="screws"></span>
 		<h3>Buildings</h3>
-		Factories: <span x-text="buildings.factories"></span>
-		Crafters: <span x-text="buildings.crafters"></span>
-		Converters: <span x-text="buildings.converters"></span>
+		Factories: <span id="factories"></span>
+		Crafters: <span id="crafters"></span>
+		Converters: <span id="converters"></span>
 	</section>
 </body>
 </html>
