@@ -6,6 +6,8 @@ const assets = [
 	'/404.html',
 	'/pages/fallback.html',
 	'/js/scripts.js',
+	'/js/game.js',
+	'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js',
 	'/css/styles.css',
 	'/img/icons/icon96.png',
 ];

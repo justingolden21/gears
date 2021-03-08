@@ -1,6 +1,6 @@
 {
-	"name": "gears",
-	"short_name": "gears",
+	"name": "Gears",
+	"short_name": "Gears",
 	"description": "a crafty cookie clicker",
 	"start_url": "index.html",
 	"display": "standalone",

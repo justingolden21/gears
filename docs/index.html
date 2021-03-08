@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>gears</title>
+	<title>Gears</title>
 	<meta charset="utf-8">
-	<meta name="title=" content="gears">
+	<meta name="title=" content="Gears">
 	<meta name="robots" content="index, follow">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="a crafty cookie clicker">
@@ -14,12 +14,25 @@
 	<meta name="apple-mobile-web-app-status-bar" content="#A1A1AA">
 	<meta name="theme-color" content="#A1A1AA">
 
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
+
 	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/scripts.js"></script>
+	<script src="js/game.js"></script>
 </head>
 <body class="text-center m-2 text-gray-900">
-	<section>
-		<h1>gears</h1>
+	<section x-data="setup()">
+		<h1>Gears</h1>
+		<button @click="start">Start</button>
+		<h3>Items</h3>
+		Gears: <span x-text="items.gears"></span>
+		Nuts: <span x-text="items.nuts"></span>
+		Bolts: <span x-text="items.bolts"></span>
+		Screws: <span x-text="items.screws"></span>
+		<h3>Buildings</h3>
+		Factories: <span x-text="buildings.factories"></span>
+		Crafters: <span x-text="buildings.crafters"></span>
+		Converters: <span x-text="buildings.converters"></span>
 	</section>
 </body>
 </html>
