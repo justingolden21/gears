@@ -12,16 +12,30 @@ let inventory = {
 	},
 };
 
-let recipes = {
+const recipes = {
 	factories: {
-		gears: 100, nuts: 20, bolts: 20, time: 5,
+		gears: 100, nuts: 20, bolts: 20, time: 10,
+	},
+	crafters: {
+		gears: 10, screws: 20, nuts: 15, time: 5,
+	},
+	converters: {
+		gears: 500, bolts: 100, time: 15,
 	},
 };
 
+const factory_speeds = {
+	gears: 2,
+	nuts: 1,
+	bolts: 1,
+	screws: 1,
+}
+
+let factory_select;
+
 function tick() {
-	inventory.items.gears += 2*inventory.buildings.factories;
-	inventory.items.nuts += inventory.buildings.factories;
-	inventory.items.bolts += inventory.buildings.factories;
+	let item = factory_select.value;
+	inventory.items[item] += factory_speeds[item] * inventory.buildings.factories;
 	display();
 }
 
@@ -58,5 +72,7 @@ function setup() {
 		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
 	}
 	document.getElementById('controls').innerHTML = html;
+
+	factory_select = document.getElementById('factory-select');
 }
 window.onload = setup;
