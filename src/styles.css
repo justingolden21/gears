@@ -25,6 +25,18 @@
 	p {
 		@apply leading-relaxed;
 	}
+	button {
+		@apply bg-gray-200 hover:bg-gray-900 hover:text-white p-2 m-2 rounded;
+	}
+	button.sm {
+		@apply p-1 m-1 text-sm;
+	}
+	button.active {
+		@apply bg-gray-900 text-white;
+	}
+	button svg {
+		display: inline;
+	}
 }
 
 @layer components {

@@ -14,11 +14,25 @@ function showSnackbar(html, location='center', ms=2500) {
 	if(ms!=0) snackbarTimeouts[location] = setTimeout(()=> s.removeClass('show'), ms);
 }
 
-/* hide all snackbars */
-function clearSnackbars() {
-	u('.snackbar').removeClass('show');
+/* stackable snackbars on the left */
+function newSnackbar(html, ms=2500) {
+	let s = u('<div>').addClass('snackbar', 'stackable', location).html(html);
+	u('#snackbars').append(s);
+	setTimeout(()=>s.addClass('show'),100);
+	setTimeout(()=>s.remove(), ms);
 }
 
-function testSnackbars() {
-	showSnackbar('center', 'center'); showSnackbar('left', 'left'); showSnackbar('right', 'right');
+/* remove all snackbars from DOM */
+function removeSnackbars() {
+	u('.snackbar').remove();
+}
+
+function testSnackbars(ms=2500) {
+	showSnackbar('center', 'center', ms);
+	showSnackbar('left', 'left', ms);
+	showSnackbar('right', 'right', ms);
+
+	newSnackbar('new snack 1', ms);
+	newSnackbar('new snack 2', ms);
+	newSnackbar('new snack 3', ms);
 }

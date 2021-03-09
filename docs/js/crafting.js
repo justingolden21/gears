@@ -17,15 +17,15 @@ const factory_speeds = {
 	screws: 1,
 };
 
-let is_crafting = false;
+let amount_crafting = 0;
 
 function craft(building) {
 	if(!can_craft(building)) {
 		showSnackbar('Not enough items', 'center');
 		return;
 	}
-	if(is_crafting) {
-		showSnackbar('Currently crafting', 'center');
+	if(amount_crafting > inventory.buildings.crafters) {
+		showSnackbar('Not enough crafters', 'center');
 		return;
 	}
 
@@ -33,11 +33,11 @@ function craft(building) {
 		if(item=='time') continue;
 		inventory.items[item] -= recipes[building][item];
 	}
-	is_crafting = true;
-	showSnackbar(`Crafting ${building}...${getSnackbar(recipes[building].time*1000)}`, 'right', recipes[building].time*1000);
+	amount_crafting++;
+	newSnackbar(`Crafting ${building}...${getSnackbar(recipes[building].time*1000)}`, recipes[building].time*1000);
 	setTimeout(()=> {
 		inventory.buildings[building] += 1;
-		is_crafting = false;
+		amount_crafting--;
 	}, recipes[building].time*1000);
 }
 

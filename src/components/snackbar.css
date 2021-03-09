@@ -1,12 +1,16 @@
+#snackbars {
+	@apply fixed bottom-0 w-full mb-24;
+}
 .snackbar {
 	min-width: 16rem;
-	@apply bg-gray-900 text-white text-center rounded-lg p-4 fixed bottom-0 opacity-0;
+	@apply bg-gray-900 text-white text-center rounded-lg p-4 bottom-0 opacity-0;
 	transition: opacity 0.5s, bottom 0.5s;
 }
 .snackbar.show {
 	opacity: 1;
 	bottom: 2rem;
 }
+
 .snackbar.left {
 	left: 16rem;
 	margin-left: -15rem;
@@ -18,4 +22,12 @@
 .snackbar.right {
 	right: 16rem;
 	margin-right: -15rem;
+}
+
+.snackbar:not(.stackable) {
+	position: fixed;
+}
+.snackbar.stackable {
+	width: 16rem;
+	@apply m-2;
 }

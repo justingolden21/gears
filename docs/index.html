@@ -15,10 +15,10 @@
 	<meta name="theme-color" content="#A1A1AA">
 
 	<link rel="stylesheet" href="css/styles.css">
+	<script src="js/lib/umbrella.min.js"></script>
 	<script src="js/scripts.js"></script>
 	<script src="js/game.js"></script>
 	<script src="js/crafting.js"></script>
-	<script src="js/lib/umbrella.min.js"></script>
 	<script src="js/components/progressbar.js"></script>
 	<script src="js/components/snackbar.js"></script>
 </head>
@@ -26,12 +26,12 @@
 	<section>
 		<h1>Gears</h1>
 		<div id="inventory">
-			<h3>Items</h3>
+			<h3 class="font-bold">Items</h3>
 			Gears: <span id="gears"></span>
 			Nuts: <span id="nuts"></span>
 			Bolts: <span id="bolts"></span>
 			Screws: <span id="screws"></span>
-			<h3>Buildings</h3>
+			<h3 class="font-bold">Buildings</h3>
 			Factories: <span id="factories"></span>
 			Crafters: <span id="crafters"></span>
 			Converters: <span id="converters"></span>
@@ -48,8 +48,10 @@
 			</select>
 		</div>
 	</section>
-	<div class="snackbar left"></div>
-	<div class="snackbar center"></div>
-	<div class="snackbar right"></div>
+	<div id="snackbars">
+		<div class="snackbar left"></div>
+		<div class="snackbar center"></div>
+		<div class="snackbar right"></div>
+	</div>
 </body>
 </html>
