@@ -5,7 +5,7 @@ const recipes = {
 	crafters: {
 		gears: 10, screws: 20, nuts: 15, time: 5,
 	},
-	converters: {
+	warehouses: {
 		gears: 500, bolts: 100, time: 15,
 	},
 };

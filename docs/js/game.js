@@ -8,16 +8,29 @@ let inventory = {
 	buildings: {
 		factories: 1,
 		crafters: 0,
-		converters: 0,
+		warehouses: 1,
 	},
 };
+
+const warehouse_space = 10_000;
 
 let factory_select;
 
 function tick() {
+	produce();
+	display();
+}
+
+let full = false;
+
+function produce() {
+	full = getItemCount() > inventory.buildings.warehouses * warehouse_space;
+	if(full) {
+		showSnackbar('Warehouses full', 'center');
+		return;
+	}
 	let item = factory_select.value;
 	inventory.items[item] += factory_speeds[item] * inventory.buildings.factories;
-	display();
 }
 
 function display() {
@@ -40,3 +53,7 @@ function setup() {
 	factory_select = document.getElementById('factory-select');
 }
 window.onload = setup;
+
+function getItemCount() {
+	return Object.values(inventory.items).reduce((a, b) => a + b, 0);
+}
