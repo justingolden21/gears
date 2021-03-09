@@ -34,7 +34,7 @@ function craft(building) {
 		inventory.items[item] -= recipes[building][item];
 	}
 	is_crafting = true;
-	showSnackbar(`Crafting ${building}...`, 'right', recipes[building].time*1000);
+	showSnackbar(`Crafting ${building}...${getSnackbar(recipes[building].time*1000)}`, 'right', recipes[building].time*1000);
 	setTimeout(()=> {
 		inventory.buildings[building] += 1;
 		is_crafting = false;

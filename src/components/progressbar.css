@@ -1,0 +1,11 @@
+/*purgecss start ignore*/
+.progressbar {
+	@apply h-3 relative max-w-xl rounded-full overflow-hidden;
+}
+.progressbar-bg {
+	@apply w-full h-full bg-gray-200 absolute;
+}
+.progressbar-bar {
+	@apply h-full bg-green-500 relative;
+}
+/*purgecss end ignore*/

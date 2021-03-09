@@ -1,3 +1,4 @@
+@import "./components/progressbar.css";
 @import "./components/snackbar.css";
 
 @tailwind base;
