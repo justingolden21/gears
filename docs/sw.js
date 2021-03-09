@@ -7,6 +7,8 @@ const assets = [
 	'/pages/fallback.html',
 	'/js/scripts.js',
 	'/js/game.js',
+	'/js/lib/umbrella.min.js',
+	'/js/components/snackbar.js',
 	'/css/styles.css',
 	'/img/icons/icon96.png',
 ];

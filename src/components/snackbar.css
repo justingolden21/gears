@@ -1,0 +1,21 @@
+.snackbar {
+	min-width: 16rem;
+	@apply bg-gray-900 text-white text-center rounded-lg p-4 fixed bottom-0 opacity-0;
+	transition: opacity 0.5s, bottom 0.5s;
+}
+.snackbar.show {
+	opacity: 1;
+	bottom: 2rem;
+}
+.snackbar.left {
+	left: 16rem;
+	margin-left: -15rem;
+}
+.snackbar.center {
+	margin-left: -8rem;
+	left: 50%;
+}
+.snackbar.right {
+	right: 16rem;
+	margin-right: -15rem;
+}
