@@ -47,13 +47,28 @@ function display() {
 	}
 }
 
+let is_crafting = false;
+
 function craft(building) {
-	if(!can_craft(building)) return;
+	if(!can_craft(building)) {
+		showSnackbar('Not enough items', 'center');
+		return;
+	}
+	if(is_crafting) {
+		showSnackbar('Currently crafting', 'center');
+		return;
+	}
+
 	for(let item in recipes[building]) {
 		if(item=='time') continue;
 		inventory.items[item] -= recipes[building][item];
 	}
-	setTimeout(()=> inventory.buildings[building] += 1, recipes[building].time*1000);
+	is_crafting = true;
+	showSnackbar(`Crafting ${building}...`, 'right', recipes[building].time*1000);
+	setTimeout(()=> {
+		inventory.buildings[building] += 1;
+		is_crafting = false;
+	}, recipes[building].time*1000);
 }
 
 function can_craft(building) {
@@ -65,7 +80,7 @@ function can_craft(building) {
 }
 
 function setup() {
-	let interval = setInterval(tick, 250);
+	let interval = setInterval(tick, 25);
 
 	let html = '';
 	for(let building in inventory.buildings) {
