@@ -9,6 +9,7 @@ const assets = [
 	'/js/game.js',
 	'/js/crafting.js',
 	'/js/storage.js',
+	'/js/util.js',
 	'/js/lib/umbrella.min.js',
 	'/js/components/progressbar.js',
 	'/js/components/snackbar.js',

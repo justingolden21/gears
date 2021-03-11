@@ -50,6 +50,17 @@ function setup() {
 	}
 	u('#controls').html(html);
 
+	html = '<h3 class="font-bold">Recipes</h3>';
+	for(let recipe in recipes) {
+		html += `<b>${capitalize(recipe)}</b>: `;
+		for(let item in recipes[recipe]) {
+			html += `${recipes[recipe][item]} ${item}, `;
+		}
+		html.slice(0,-2); // remove trailing ", "
+		html += '<br>';
+	}
+	u('#recipes').html(html);
+
 	factory_select = u('#factory-select').first();
 
 	let inv = getData();
