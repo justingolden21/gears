@@ -36,7 +36,7 @@ function produce() {
 function display() {
 	for(let category in inventory) {
 		for(let key in inventory[category]) {
-			document.getElementById(key).innerText = inventory[category][key];
+			u('#'+key).text(inventory[category][key]);
 		}
 	}
 }
@@ -48,9 +48,9 @@ function setup() {
 	for(let building in inventory.buildings) {
 		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
 	}
-	document.getElementById('controls').innerHTML = html;
+	u('#controls').html(html);
 
-	factory_select = document.getElementById('factory-select');
+	factory_select = u('#factory-select').first();
 }
 window.onload = setup;
 
