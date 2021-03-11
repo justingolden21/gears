@@ -42,7 +42,7 @@ function display() {
 }
 
 function setup() {
-	let interval = setInterval(tick, 250);
+	let tick_interval = setInterval(tick, 250);
 
 	let html = '';
 	for(let building in inventory.buildings) {
@@ -51,6 +51,10 @@ function setup() {
 	u('#controls').html(html);
 
 	factory_select = u('#factory-select').first();
+
+	let inv = getData();
+	if(inv) inventory = inv;
+	let save_interval = setInterval(()=>setData(inventory), 2500);
 }
 window.onload = setup;
 

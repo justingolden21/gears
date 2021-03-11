@@ -8,6 +8,7 @@ const assets = [
 	'/js/scripts.js',
 	'/js/game.js',
 	'/js/crafting.js',
+	'/js/storage.js',
 	'/js/lib/umbrella.min.js',
 	'/js/components/progressbar.js',
 	'/js/components/snackbar.js',
