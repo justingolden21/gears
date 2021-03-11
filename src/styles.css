@@ -1,5 +1,6 @@
 @import "./components/progressbar.css";
 @import "./components/snackbar.css";
+@import "./components/tabs.css";
 
 @tailwind base;
 @tailwind components;
@@ -24,6 +25,9 @@
 	}
 	p {
 		@apply leading-relaxed;
+	}
+	a {
+		@apply text-gray-500 hover:underline;
 	}
 	button {
 		@apply bg-gray-200 hover:bg-gray-900 hover:text-white p-2 m-2 rounded;

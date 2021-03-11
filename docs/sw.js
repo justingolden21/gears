@@ -13,6 +13,7 @@ const assets = [
 	'/js/lib/umbrella.min.js',
 	'/js/components/progressbar.js',
 	'/js/components/snackbar.js',
+	'/js/components/tabs.js',
 	'/css/styles.css',
 	'/img/icons/icon96.png',
 ];

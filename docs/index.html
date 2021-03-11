@@ -23,25 +23,44 @@
 	<script src="js/util.js"></script>
 	<script src="js/components/progressbar.js"></script>
 	<script src="js/components/snackbar.js"></script>
+	<script src="js/components/tabs.js"></script>
 </head>
 <body class="text-center m-2 text-gray-900">
-	<section>
-		<h1>Gears</h1>
-		<div id="inventory">
-			<h3 class="font-bold">Items</h3>
-			Gears: <span id="gears"></span>
-			Nuts: <span id="nuts"></span>
-			Bolts: <span id="bolts"></span>
+	<h1>Gears</h1>
+	<section class="container p-4 mx-auto">
+		<div class="mb-8 mx-auto md:sticky md:top-0 bg-white
+			grid grid-cols-1 md:grid-cols-5">
+			<a class="active tab" data-tab="inventory">
+				Inventory
+			</a>
+			<a class="tab" data-tab="buildings">
+				Buildings
+			</a>
+			<a class="tab" data-tab="controls">
+				Controls
+			</a>
+			<a class="tab" data-tab="recipes">
+				Recipes
+			</a>
+			<a class="tab" data-tab="about">
+				About
+			</a>
+			<div class="presentation-slider" role="presentation"></div>
+		</div>
+		<div id="inventory" class="tab-content">
+			<h2 class="my-4">Inventory</h3>
+			<h3 class="my-4 font-bold">Items</h3>
+			Gears: <span id="gears"></span>,
+			Nuts: <span id="nuts"></span>,
+			Bolts: <span id="bolts"></span>,
 			Screws: <span id="screws"></span>
-			<h3 class="font-bold">Buildings</h3>
-			Factories: <span id="factories"></span>
-			Crafters: <span id="crafters"></span>
+			<h3 class="my-4 font-bold">Buildings</h3>
+			Factories: <span id="factories"></span>,
+			Crafters: <span id="crafters"></span>,
 			Warehouses: <span id="warehouses"></span>
 		</div>
-		<div id="controls">
-		</div>
-		<div id="buildings">
-			Factory makes
+		<div id="buildings" class="tab-content">
+			<label for="factory-select">Factory makes</label>
 			<select id="factory-select">
 				<option value="gears">gears</option>
 				<option value="nuts">nuts</option>
@@ -49,9 +68,16 @@
 				<option value="screws">screws</option>
 			</select>
 		</div>
-		<div id="recipes">
+		<div id="controls" class="tab-content">
+		</div>
+		<div id="recipes" class="tab-content">
+		</div>
+		<div id="about" class="tab-content">
+			<h2 class="mb-4">About</h2>
+			<p>Made by <a href="https://justingolden.me" target="_blank">Justin Golden</a></p>
 		</div>
 	</section>
+	
 	<div id="snackbars">
 		<div class="snackbar left"></div>
 		<div class="snackbar center"></div>
