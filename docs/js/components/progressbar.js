@@ -1,5 +1,5 @@
 let progressbar_id = 0;
-function getSnackbar(ms=1) {
+function getProgressbar(ms=1) {
 	setTimeout(()=> {
 		u('#bar-'+progressbar_id).removeClass('w-0').addClass('w-full');
 	},100);

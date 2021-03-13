@@ -34,6 +34,8 @@ window.addEventListener('load', () => {
 });
 
 function openTab(tabName) {
+	if(tabName==null) return;
+	
 	// open the tab, hide others
 	u('.tab-content').addClass('hidden');
 	u(`#${tabName}`).removeClass('hidden');

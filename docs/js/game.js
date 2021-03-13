@@ -13,9 +13,9 @@ let inventory = {
 	},
 };
 
-const warehouse_space = 10_000;
+// todo: pause btn
 
-let factory_select;
+const warehouse_space = 10_000;
 
 function tick() {
 	produce();
@@ -30,8 +30,16 @@ function produce() {
 		showSnackbar('Warehouses full', 'center');
 		return;
 	}
-	let item = factory_select.value;
-	inventory.items[item] += factory_speeds[item] * inventory.buildings.factories;
+	let factories_can_produce = inventory.buildings.factories;
+	for(let item in inventory.items) {
+		if(item=='items'||item=='buildings') continue;
+		let amount = Math.min(factories_can_produce, u(`#produce-${item}-range`).first().value);
+		u(`#produce-${item}-range`).first().value = amount;
+		if(factories_can_produce < 1) break;
+		factories_can_produce -= amount;
+		inventory.items[item] += factory_speeds[item] * amount;
+	}
+	updateRangeInputs();
 }
 
 function display() {
@@ -80,25 +88,36 @@ function setup() {
 	}
 	u('#inventory').append(html);
 
-	html = '';
+	html = '<h3 class="font-bolt">Factory makes</h3>';
 	for(let item in inventory.items) {
-		html += `<option value="${item}">${capitalize(item)}</option>`;
+		// todo: add span that displays value on change
+		html += `<input id="produce-${item}-range" type="range" value="0" step="1" min="0" max="1"> ${capitalize(item)}<br>`;
 	}
-	u('#factory-select').html(html);
-
-	factory_select = u('#factory-select').first();
+	u('#buildings').html(html);
+	updateRangeInputs();
+	u('#produce-gears-range').first().value = 1;
 
 	let inv = getData();
 	// if(inv) inventory = inv;
 	// supports adding new items and buildings in future
 	for(let category in inv) {
-		for(let key in inv) {
+		for(let key in inv[category]) {
 			inventory[category][key] = inv[category][key];
 		}
 	}
 	let save_interval = setInterval(()=>setData(inventory), 2500);
 }
 window.onload = setup;
+
+let prev_factories = 1;
+function updateRangeInputs() {
+	let factories = inventory.buildings.factories;
+	if(prev_factories == factories) return;
+	for(let item in inventory.items) {
+		u(`#produce-${item}-range`).attr('max', factories);
+	}
+	prev_factories = factories;
+}
 
 function deleteItems() {
 	let key = u('#delete-select').first().value;
