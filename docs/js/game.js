@@ -73,7 +73,7 @@ function setup() {
 		for(let item in recipes[recipe]) {
 			html += `${recipes[recipe][item]} ${item}, `;
 		}
-		html.slice(0,-2); // remove trailing ", "
+		html = html.slice(0,-2); // remove trailing ", "
 		html += '<br>';
 	}
 	u('#recipes').html(html);
