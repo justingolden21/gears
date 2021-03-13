@@ -9,6 +9,7 @@ let inventory = {
 		factories: 1,
 		crafters: 0,
 		warehouses: 1,
+		converters: 0,
 	},
 };
 
@@ -44,10 +45,18 @@ function display() {
 function setup() {
 	let tick_interval = setInterval(tick, 250);
 
-	let html = '';
+	let html = '<h3 class="font-bold">Craft</h3>';
 	for(let building in inventory.buildings) {
 		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
 	}
+	html += '<h3 class="font-bold">Delete</h3>';
+	html += '<input id="delete-input" type="number" value="0">';
+	html += '<select id="delete-select">';
+	for(let item in inventory.items) {
+		html += `<option value="${item}">${item}</option>`;
+	}
+	html += '</select>';
+	html += '<button onclick="deleteItems()">Delete</button>';
 	u('#controls').html(html);
 
 	html = '<h3 class="font-bold">Recipes</h3>';
@@ -64,10 +73,26 @@ function setup() {
 	factory_select = u('#factory-select').first();
 
 	let inv = getData();
-	if(inv) inventory = inv;
+	// if(inv) inventory = inv;
+	// supports adding new items and buildings in future
+	for(let category in inv) {
+		for(let key in inv) {
+			inventory[category][key] = inv[category][key];
+		}
+	}
 	let save_interval = setInterval(()=>setData(inventory), 2500);
 }
 window.onload = setup;
+
+function deleteItems() {
+	let key = u('#delete-select').first().value;
+	let amount = u('#delete-input').first().value;
+	amount = Math.max(amount, 0);
+	amount = Math.min(amount, inventory.items[key]);
+	inventory.items[key] -= amount;
+	showSnackbar(`Deleted ${amount} ${key}`, 'center');
+	u('#delete-input').first().value = amount;
+}
 
 function getItemCount() {
 	return Object.values(inventory.items).reduce((a, b) => a + b, 0);

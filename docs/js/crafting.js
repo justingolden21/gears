@@ -8,6 +8,9 @@ const recipes = {
 	warehouses: {
 		gears: 500, bolts: 100, time: 15,
 	},
+	converters: {
+		gears: 200, bolts: 20, nuts: 25, time: 5,
+	},
 };
 
 const factory_speeds = {
