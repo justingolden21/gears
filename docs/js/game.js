@@ -70,6 +70,22 @@ function setup() {
 	}
 	u('#recipes').html(html);
 
+	html = '<h3 class="my-4 font-bold">Items</h3>';
+	for(let item in inventory.items) {
+		html += `<p>${capitalize(item)}: <span id="${item}"></span></p>`;
+	}
+	html += '<h3 class="my-4 font-bold">Buildings</h3>';
+	for(let building in inventory.buildings) {
+		html += `<p>${capitalize(building)}: <span id="${building}"></span></p>`;
+	}
+	u('#inventory').append(html);
+
+	html = '';
+	for(let item in inventory.items) {
+		html += `<option value="${item}">${capitalize(item)}</option>`;
+	}
+	u('#factory-select').html(html);
+
 	factory_select = u('#factory-select').first();
 
 	let inv = getData();
