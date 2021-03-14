@@ -35,7 +35,8 @@ function produce() {
 		if(item=='items'||item=='buildings') continue;
 		let amount = Math.min(factories_can_produce, u(`#produce-${item}-range`).first().value);
 		u(`#produce-${item}-range`).first().value = amount;
-		if(factories_can_produce < 1) break;
+		u(`#produce-${item}-value`).html(amount);
+		if(factories_can_produce < 1) continue; // break; // continue so we can set amounts to 0 on next ranges
 		factories_can_produce -= amount;
 		inventory.items[item] += factory_speeds[item] * amount;
 	}
@@ -45,7 +46,7 @@ function produce() {
 function display() {
 	for(let category in inventory) {
 		for(let key in inventory[category]) {
-			u('#'+key).text(inventory[category][key]);
+			u('.'+key).text(inventory[category][key]);
 		}
 	}
 }
@@ -80,18 +81,17 @@ function setup() {
 
 	html = '<h3 class="my-4 font-bold">Items</h3>';
 	for(let item in inventory.items) {
-		html += `<p>${capitalize(item)}: <span id="${item}"></span></p>`;
+		html += `<p>${capitalize(item)}: <span class="${item}"></span></p>`;
 	}
 	html += '<h3 class="my-4 font-bold">Buildings</h3>';
 	for(let building in inventory.buildings) {
-		html += `<p>${capitalize(building)}: <span id="${building}"></span></p>`;
+		html += `<p>${capitalize(building)}: <span class="${building}"></span></p>`;
 	}
 	u('#inventory').append(html);
 
-	html = '<h3 class="font-bolt">Factory makes</h3>';
+	html = '<h3 class="font-bolt"><span class="factories"></span> Factories produce</h3>';
 	for(let item in inventory.items) {
-		// todo: add span that displays value on change
-		html += `<input id="produce-${item}-range" type="range" value="0" step="1" min="0" max="1"> ${capitalize(item)}<br>`;
+		html += `<span id="produce-${item}-value"></span> <input id="produce-${item}-range" type="range" value="0" step="1" min="0" max="1"> ${capitalize(item)}<br>`;
 	}
 	u('#buildings').html(html);
 	updateRangeInputs();
