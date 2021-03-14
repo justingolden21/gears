@@ -24,7 +24,7 @@ let amount_crafting = 0;
 
 function craft(building) {
 	if(!can_craft(building)) {
-		showSnackbar('Not enough items', 'center');
+		showSnackbar('Not enough parts', 'center');
 		return;
 	}
 	if(amount_crafting > inventory.buildings.crafters) {
@@ -32,9 +32,9 @@ function craft(building) {
 		return;
 	}
 
-	for(let item in recipes[building]) {
-		if(item=='time') continue;
-		inventory.items[item] -= recipes[building][item];
+	for(let part in recipes[building]) {
+		if(part=='time') continue;
+		inventory.parts[part] -= recipes[building][part];
 	}
 	amount_crafting++;
 	newSnackbar(`Crafting ${building}...${getProgressbar(recipes[building].time*1000)}`, recipes[building].time*1000);
@@ -45,9 +45,9 @@ function craft(building) {
 }
 
 function can_craft(building) {
-	for(let item in recipes[building]) {
-		if(item=='time') continue;
-		if(inventory.items[item] < recipes[building][item]) return false;
+	for(let part in recipes[building]) {
+		if(part=='time') continue;
+		if(inventory.parts[part] < recipes[building][part]) return false;
 	}
 	return true;
 }
