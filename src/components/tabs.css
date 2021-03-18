@@ -1,6 +1,6 @@
 @layer components {
 	.tab {
-		@apply sm:px-6 py-1 sm:py-3 w-1/2 md:w-auto justify-center mx-auto md:mx-0 border-b-2 font-medium inline-flex items-center leading-none border-gray-300 text-gray-500 hover:text-gray-700 tracking-wider rounded-t cursor-pointer;
+		@apply sm:px-6 py-1 sm:py-3 w-1/2 md:w-auto justify-center mx-auto md:mx-0 border-b-2 font-medium md:inline-flex items-center leading-none border-gray-300 text-gray-500 hover:text-gray-700 tracking-wider rounded-t cursor-pointer;
 	}
 	a.tab {
 		@apply no-underline hover:no-underline;

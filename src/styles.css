@@ -18,7 +18,7 @@
 	}
 
 	h1 {
-		@apply text-2xl font-light;
+		@apply text-3xl tracking-wide;
 	}
 	h2 {
 		@apply text-xl font-medium;

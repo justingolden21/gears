@@ -52,8 +52,6 @@ function display() {
 }
 
 function setup() {
-	let tick_interval = setInterval(tick, 250);
-
 	let html = '<h3 class="font-bold">Craft</h3>';
 	for(let building in inventory.buildings) {
 		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
@@ -81,15 +79,15 @@ function setup() {
 	}
 	u('#recipes').html(html);
 
-	html = `<div class="grid grid-cols-1 md:grid-cols-2"><div>
-		<h3 class="my-4 font-bold">${getIcon('parts')} Items</h3>`;
+	html = `<div class="grid grid-cols-1 md:grid-cols-2"><div class="m-2 p-2 border-2 border-gray-300">
+		<h3 class="my-4 font-bold">${getIcon('parts')} Parts</h3>`;
 	for(let part in inventory.parts) {
-		html += `<span><img src="https://via.placeholder.com/24" class="w-6 inline"> <span class="${part}"></span> ${capitalize(part)}<span>, `;
+		html += `<span><img src="https://via.placeholder.com/24" class="w-6 mx-1 inline"> <span class="${part}"></span> ${capitalize(part)}<span>, `;
 	}
 	html = html.slice(0,-2); // remove trailing ", "
-	html += `</div><div><h3 class="my-4 font-bold">${getIcon('buildings')} Buildings</h3>`;
+	html += `</div><div class="m-2 p-2 border-2 border-gray-300"><h3 class="my-4 font-bold">${getIcon('buildings')} Buildings</h3>`;
 	for(let building in inventory.buildings) {
-		html += `<span><img src="https://via.placeholder.com/24" class="w-6 inline"> <span class="${building}"></span> ${capitalize(building)}<span>, `;
+		html += `<span><img src="https://via.placeholder.com/24" class="w-6 mx-1 inline"> <span class="${building}"></span> ${capitalize(building)}<span>, `;
 	}
 	html = html.slice(0,-2); // remove trailing ", "
 	html += '</div></div>';
@@ -108,10 +106,13 @@ function setup() {
 	// supports adding new parts and buildings in future
 	for(let category in inv) {
 		for(let key in inv[category]) {
-			if(inventory[category] && inventory[category][key]) inventory[category][key] = inv[category][key];
+			if(inventory[category] != undefined && inventory[category][key] != undefined) {
+				inventory[category][key] = inv[category][key];
+			}
 		}
 	}
 	let save_interval = setInterval(()=>setData(inventory), 2500);
+	let tick_interval = setInterval(tick, 250);
 }
 window.onload = setup;
 
