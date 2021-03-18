@@ -1,12 +1,19 @@
 window.addEventListener('load', () => {
 	u('.tab-content').addClass('hidden');
-	u('.tab').on('click', (e)=> {
+	u('.tab').on('click', e => {
+		let target = e.target;
+
+		// if clicked on a child of a tab like an icon, get parent
+		while(!target.classList.contains('tab')) {
+			target = target.parentNode;
+		}
+
 		// tab active classes
 		u('.tab').removeClass('active');
-		u(e.target).addClass('active');
+		u(target).addClass('active');
 
 		// display tab content
-		const tabName = u(e.target).attr('data-tab');
+		const tabName = u(target).attr('data-tab');
 		openTab(tabName);
 	});
 
@@ -34,8 +41,6 @@ window.addEventListener('load', () => {
 });
 
 function openTab(tabName) {
-	if(tabName==null) return;
-	
 	// open the tab, hide others
 	u('.tab-content').addClass('hidden');
 	u(`#${tabName}`).removeClass('hidden');
