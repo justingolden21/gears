@@ -72,6 +72,7 @@ function setup() {
 	for(let recipe in recipes) {
 		html += `<b>${capitalize(recipe)}</b>: `;
 		for(let part in recipes[recipe]) {
+			if(recipes[recipe][part]==0) continue;
 			html += `${recipes[recipe][part]} ${part}, `;
 		}
 		html = html.slice(0,-2); // remove trailing ", "

@@ -1,15 +1,15 @@
 const recipes = {
 	factories: {
-		gears: 100, nuts: 20, bolts: 20, time: 10,
+		bolts: 40,  gears: 100, nuts: 20,  screws: 0,   time: 10,
 	},
 	crafters: {
-		gears: 10, screws: 20, nuts: 15, time: 5,
+		bolts: 20,  gears: 60,  nuts: 0,   screws: 60,  time: 10,
 	},
 	warehouses: {
-		gears: 500, bolts: 100, time: 15,
+		bolts: 80,  gears: 0,   nuts: 100, screws: 40,  time: 15,
 	},
 	converters: {
-		gears: 200, bolts: 20, nuts: 25, time: 5,
+		bolts: 0,   gears: 20,  nuts: 20,  screws: 20,  time: 5,
 	},
 };
 
