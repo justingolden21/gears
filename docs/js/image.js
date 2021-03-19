@@ -6,3 +6,9 @@ const icons = {
 function getIcon(name) {
 	return icons[name];
 }
+
+function getSprite(name, size='md', classes='') {
+	if(Object.keys(inventory.parts).indexOf(name) != -1 || name=='time') name += '.png';
+	else name += '.gif';
+	return `<img class="sprite ${size} ${classes}" src="img/sprites/${name}">`;
+}

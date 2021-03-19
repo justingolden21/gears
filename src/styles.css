@@ -41,6 +41,27 @@
 	button svg {
 		display: inline;
 	}
+
+	img.sprite {
+		@apply inline mx-1;
+		image-rendering: pixelated;
+	}
+	img.sprite.sm {
+		width: 24px;
+		height: 24px;
+	}
+	img.sprite.md {
+		width: 48px;
+		height: 48px;
+	}
+	img.sprite.lg {
+		width: 64px;
+		height: 64px;
+	}
+	img.sprite.xl {
+		width: 96px;
+		height: 96px;
+	}
 }
 
 @layer components {

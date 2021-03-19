@@ -54,7 +54,7 @@ function display() {
 function setup() {
 	let html = '<h3 class="font-bold">Craft</h3>';
 	for(let building in inventory.buildings) {
-		html += `<button onclick="craft('${building}')">Craft ${building}</button>`;
+		html += `<button onclick="craft('${building}')">Craft ${building} ${getSprite(building, 'md')}</button>`;
 	}
 	u('#crafting').html(html);
 
@@ -73,7 +73,7 @@ function setup() {
 		html += `<b>${capitalize(recipe)}</b>: `;
 		for(let part in recipes[recipe]) {
 			if(recipes[recipe][part]==0) continue;
-			html += `${recipes[recipe][part]} ${part}, `;
+			html += `${recipes[recipe][part]} ${part} ${getSprite(part, 'sm')}, `;
 		}
 		html = html.slice(0,-2); // remove trailing ", "
 		html += '<br>';
@@ -83,18 +83,18 @@ function setup() {
 	html = `<div class="grid grid-cols-1 md:grid-cols-2"><div class="m-2 p-2 border-2 border-gray-300">
 		<h3 class="my-4 font-bold">${getIcon('parts')} Parts</h3>`;
 	for(let part in inventory.parts) {
-		html += `<span><img src="https://via.placeholder.com/24" class="w-6 mx-1 inline"> <span class="${part}"></span> ${capitalize(part)}<span>, `;
+		html += `<span>${getSprite(part, 'md')} <span class="${part}"></span> ${capitalize(part)}<span>, `;
 	}
 	html = html.slice(0,-2); // remove trailing ", "
 	html += `</div><div class="m-2 p-2 border-2 border-gray-300"><h3 class="my-4 font-bold">${getIcon('buildings')} Buildings</h3>`;
 	for(let building in inventory.buildings) {
-		html += `<span><img src="https://via.placeholder.com/24" class="w-6 mx-1 inline"> <span class="${building}"></span> ${capitalize(building)}<span>, `;
+		html += `<span>${getSprite(building, 'md')} <span class="${building}"></span> ${capitalize(building)}<span>, `;
 	}
 	html = html.slice(0,-2); // remove trailing ", "
 	html += '</div></div>';
 	u('#inventory').append(html);
 
-	html = '<h3 class="font-bolt"><span class="factories"></span> Factories produce</h3>';
+	html = getSprite('factories', 'lg') + ' <h3 class="font-bolt"><span class="factories"></span> Factories produce</h3>';
 	for(let part in inventory.parts) {
 		html += `<span id="produce-${part}-value"></span> <input id="produce-${part}-range" type="range" value="0" step="1" min="0" max="1"> ${capitalize(part)}<br>`;
 	}
