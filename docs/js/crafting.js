@@ -22,8 +22,8 @@ const factory_speeds = {
 
 let amount_crafting = 0;
 
-function craft(building) {
-	if(!can_craft(building)) {
+function craft(building, amount=1) {
+	if(!can_craft(building, amount)) {
 		showSnackbar('Not enough parts', 'center');
 		return;
 	}
@@ -34,20 +34,20 @@ function craft(building) {
 
 	for(let part in recipes[building]) {
 		if(part=='time') continue;
-		inventory.parts[part] -= recipes[building][part];
+		inventory.parts[part] -= recipes[building][part] * amount;
 	}
-	amount_crafting++;
-	newSnackbar(`${getSprite(building, 'sm', 'mb-1')} Crafting ${building}...${getProgressbar(recipes[building].time*1000)}`, recipes[building].time*1000);
+	amount_crafting += amount;
+	newSnackbar(`${getSprite(building, 'sm', 'mb-1')} Crafting ${amount} ${building}...${getProgressbar(recipes[building].time*1000)}`, recipes[building].time*1000);
 	setTimeout(()=> {
-		inventory.buildings[building] += 1;
-		amount_crafting--;
+		inventory.buildings[building] += amount;
+		amount_crafting -= amount;
 	}, recipes[building].time*1000);
 }
 
-function can_craft(building) {
+function can_craft(building, amount) {
 	for(let part in recipes[building]) {
 		if(part=='time') continue;
-		if(inventory.parts[part] < recipes[building][part]) return false;
+		if(inventory.parts[part] < recipes[building][part] * amount) return false;
 	}
 	return true;
 }

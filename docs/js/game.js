@@ -55,7 +55,7 @@ function produce() {
 		if(crafters_can_craft < 1) continue; // break; // continue so we can set amounts to 0 on next ranges
 		crafters_can_craft -= amount;
 		if(tick_num % 40 == 0) { // only do craft every 10s, but still validate ranges every tick
-			for(let i=0; i<amount; i++) craft(building);
+			if(amount != 0) craft(building, amount);
 			u('#next-craft').html('<p>Time until next craft:</p> ' + getProgressbar(10*1000) ); // show progress bar for 10s
 		}
 	}
@@ -74,8 +74,9 @@ function display() {
 
 function setup() {
 	let html = getSprite('crafters', 'lg') + '<h3>Crafting</h3><p>Craft:</p>';
+	html += '<select id="craft-amount-select"><option value="1">1</option><option value="10">10</option><option value="100">100</option></select>';
 	for(let building in inventory.buildings) {
-		html += `<button onclick="craft('${building}')">Craft ${building} ${getSprite(building, 'md')}</button>`;
+		html += `<button onclick="craft('${building}', parseInt(u('#craft-amount-select').first().value) )">Craft ${building} ${getSprite(building, 'md')}</button>`;
 	}
 	html += '<p><span class="crafters"></span> crafters</p>';
 	for(let building in inventory.buildings) {
