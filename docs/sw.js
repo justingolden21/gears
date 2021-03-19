@@ -17,6 +17,15 @@ const assets = [
 	'/js/components/tabs.js',
 	'/css/styles.css',
 	'/img/icons/icon96.png',
+	'/img/sprites/bolt.png',
+	'/img/sprites/converters.png',
+	'/img/sprites/crafters.png',
+	'/img/sprites/factories.png',
+	'/img/sprites/gears.png',
+	'/img/sprites/nuts.png',
+	'/img/sprites/screws.png',
+	'/img/sprites/time.png',
+	'/img/sprites/warehouses.png',
 ];
 
 // cache size limit function
