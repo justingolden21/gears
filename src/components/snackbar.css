@@ -1,5 +1,6 @@
 #snackbars {
 	@apply fixed bottom-0 w-full mb-24;
+	z-index: -1;
 }
 .snackbar {
 	min-width: 16rem;

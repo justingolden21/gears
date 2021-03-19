@@ -37,7 +37,7 @@ function craft(building) {
 		inventory.parts[part] -= recipes[building][part];
 	}
 	amount_crafting++;
-	newSnackbar(`Crafting ${building}...${getProgressbar(recipes[building].time*1000)}`, recipes[building].time*1000);
+	newSnackbar(`${getSprite(building, 'sm', 'mb-1')} Crafting ${building}...${getProgressbar(recipes[building].time*1000)}`, recipes[building].time*1000);
 	setTimeout(()=> {
 		inventory.buildings[building] += 1;
 		amount_crafting--;
