@@ -40,6 +40,7 @@ function produce() {
 		factories_can_produce -= amount;
 		inventory.parts[part] += factory_speeds[part] * amount;
 	}
+	u('.production-total').text(inventory.buildings.factories - factories_can_produce);
 	updateRangeInputs();
 }
 
@@ -94,10 +95,11 @@ function setup() {
 	html += '</div></div>';
 	u('#inventory').append(html);
 
-	html = getSprite('factories', 'lg') + ' <h3 class="font-bolt"><span class="factories"></span> Factories produce</h3>';
+	html = getSprite('factories', 'lg') + ' <h3>Factory Production</h3><p><span class="factories"></span> factories</p>';
 	for(let part in inventory.parts) {
-		html += `<span id="produce-${part}-value"></span> <input id="produce-${part}-range" type="range" value="0" step="1" min="0" max="1"> ${capitalize(part)}<br>`;
+		html += `<span id="produce-${part}-value"></span> <input id="produce-${part}-range" type="range" value="0" step="1" min="0" max="1"> ${getSprite(part, 'md')} ${capitalize(part)}<br>`;
 	}
+	html += '<p class="production-total"></p>'
 	u('#production').html(html);
 	updateRangeInputs();
 	u('#produce-gears-range').first().value = 1;
@@ -114,6 +116,7 @@ function setup() {
 	}
 	let save_interval = setInterval(()=>setData(inventory), 2500);
 	let tick_interval = setInterval(tick, 250);
+	tick();
 }
 window.onload = setup;
 
