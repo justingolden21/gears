@@ -133,7 +133,7 @@ function setup() {
 	html = getSprite('converters', 'lg') + '<h3>Conversion</h3><p><span class="converters"></span> converters</p>';
 	html += '<p>Converters convert 1 part into any other 1 part per tick</p>';
 	html += '<p>Convert:</p>';
-	html += '<span id="convert-value"></span> <input id="convert-range" type="range" value="0" step="1" min="0" max="1">';
+	html += '<span id="convert-value"></span> <input id="convert-range" type="range" value="0" step="1" min="0" max="1"><br>';
 	html += '<select id="convert-from-select">';
 	for(let part in inventory.parts) {
 		html += `<option value="${part}">${part}</option>`;
