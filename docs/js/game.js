@@ -36,7 +36,6 @@ function produce() {
 	let val = u('#convert-range').first().value;
 	let from_part = u('#convert-from-select').first().value;
 	let to_part = u('#convert-to-select').first().value;
-	console.log(val, from_part, to_part);
 	u('#convert-value').text(val);
 	let amount_convert = Math.min(inventory.buildings.converters, val);
 	if(from_part != to_part) {
