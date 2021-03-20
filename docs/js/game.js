@@ -9,7 +9,7 @@ let inventory = {
 		factories: 1,
 		crafters: 0,
 		warehouses: 1,
-		converters: 0,
+		converters: 1,
 	},
 };
 
@@ -32,12 +32,27 @@ function tick() {
 let full = false;
 
 function produce() {
+	// conversion
+	let val = u('#convert-range').first().value;
+	let from_part = u('#convert-from-select').first().value;
+	let to_part = u('#convert-to-select').first().value;
+	console.log(val, from_part, to_part);
+	u('#convert-value').text(val);
+	let amount_convert = Math.min(inventory.buildings.converters, val);
+	if(from_part != to_part) {
+		amount_convert = Math.min(amount_convert, inventory.parts[from_part]);
+		inventory.parts[from_part] -= amount_convert;
+		inventory.parts[to_part] += amount_convert;
+	}
+
+	// warehouses full
 	full = getPartCount() > inventory.buildings.warehouses * warehouse_space;
 	if(full) {
 		showSnackbar('Warehouses full', 'center');
 		return;
 	}
 
+	// production
 	let factories_can_produce = inventory.buildings.factories;
 	for(let part in inventory.parts) {
 		if(part=='parts'||part=='buildings') continue;
@@ -50,6 +65,7 @@ function produce() {
 	}
 	u('.production-total').text(inventory.buildings.factories - factories_can_produce);
 
+	// crafting
 	let crafters_can_craft = inventory.buildings.crafters;
 	for(let building in inventory.buildings) {
 		if(building=='parts'||building=='buildings') continue;
@@ -109,11 +125,28 @@ function setup() {
 	html += '<input id="delete-input" type="number" value="0">';
 	html += '<select id="delete-select">';
 	for(let part in inventory.parts) {
-		html += `<option value="${part}">${part}</option>`;
+		html += `<option value="${part}">${capitalize(part)}</option>`;
 	}
 	html += '</select>';
 	html += '<button onclick="deleteParts()">Delete</button>';
 	u('#storage').html(html);
+
+	html = getSprite('converters', 'lg') + '<h3>Conversion</h3><p><span class="converters"></span> converters</p>';
+	html += '<p>Converters convert 1 part into any other 1 part per tick</p>';
+	html += '<p>Convert:</p>';
+	html += '<span id="convert-value"></span> <input id="convert-range" type="range" value="0" step="1" min="0" max="1">';
+	html += '<select id="convert-from-select">';
+	for(let part in inventory.parts) {
+		html += `<option value="${part}">${part}</option>`;
+	}
+	html += '</select>';
+	html += ' &#10132; ';
+	html += '<select id="convert-to-select">';
+	for(let part in inventory.parts) {
+		html += `<option value="${part}">${part}</option>`;
+	}
+	html += '</select>';
+	u('#conversion').html(html);
 
 	html = '<h3 class="font-bold">Recipes</h3>';
 	for(let recipe in recipes) {
@@ -172,7 +205,7 @@ function setup() {
 }
 window.onload = setup;
 
-let prev_factories = 1, prev_crafters = 1;
+let prev_factories = 1, prev_crafters = 1, prev_converters = 1;
 function updateRangeInputs() {
 	let factories = inventory.buildings.factories;
 	if(prev_factories != factories) {
@@ -189,6 +222,14 @@ function updateRangeInputs() {
 		}
 		prev_crafters = crafters;
 	}
+
+	let converters = inventory.buildings.converters;
+	if(prev_converters != converters) {
+		u('#convert-range').attr('max', converters);
+		prev_converters = converters;
+	}
+	// u('#convert-range').attr('max', inventory.buildings.converters);
+
 }
 
 function deleteParts() {
