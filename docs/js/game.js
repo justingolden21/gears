@@ -15,6 +15,9 @@ let inventory = {
 
 // todo: pause btn
 // todo: save range inputs, currently crafting, and tick num
+// todo: display numbers with commas
+// todo: intermediate parts, energy, map showing sprites
+
 
 const warehouse_space = 10_000;
 

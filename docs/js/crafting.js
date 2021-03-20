@@ -24,7 +24,12 @@ let amount_crafting = 0;
 
 function craft(building, amount=1) {
 	if(!can_craft(building, amount)) {
-		showSnackbar('Not enough parts', 'center');
+		let new_amount = max_craft(building);
+		if(new_amount==0) {
+			showSnackbar('Not enough parts to craft ' + building, 'center');
+		} else {
+			craft(building, new_amount);
+		}
 		return;
 	}
 	if(amount_crafting > inventory.buildings.crafters) {
@@ -50,4 +55,16 @@ function can_craft(building, amount) {
 		if(inventory.parts[part] < recipes[building][part] * amount) return false;
 	}
 	return true;
+}
+
+function max_craft(building) {
+	let limit = Infinity;
+	for(let part in recipes[building]) {
+		if(part=='time') continue;
+		let how_many = Math.floor(inventory.parts[part] / recipes[building][part]);
+		if(limit > how_many) {
+			limit = how_many;
+		}
+	}
+	return limit;
 }

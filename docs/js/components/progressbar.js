@@ -1,9 +1,7 @@
 let next_progressbar_id = 0;
 function getProgressbar(ms=1) {
 	let progressbar_id = next_progressbar_id++;
-	console.log(progressbar_id);
 	setTimeout(()=> {
-		console.log(progressbar_id);
 		u('#bar-'+progressbar_id).removeClass('w-0').addClass('w-full');
 	},100);
 	return `<div class="progressbar">
