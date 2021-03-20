@@ -144,7 +144,12 @@ function setup() {
 			}
 		}
 	}
-	let save_interval = setInterval(()=>setData(inventory), 2500);
+	setTimeout(loadSettings, 500); // wait for range inputs to render on DOM
+
+	let save_interval = setInterval(()=> {
+		setData(inventory);
+		saveSettings();
+	}, 2500);
 	let tick_interval = setInterval(tick, 250);
 	tick();
 }
@@ -181,4 +186,9 @@ function deleteParts() {
 
 function getPartCount() {
 	return Object.values(inventory.parts).reduce((a, b) => a + b, 0);
+}
+
+function clearAllData() {
+	clearData();
+	window.location.reload();
 }

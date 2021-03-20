@@ -11,6 +11,7 @@ const assets = [
 	'/js/storage.js',
 	'/js/util.js',
 	'/js/image.js',
+	'/js/settings.js',
 	'/js/lib/umbrella.min.js',
 	'/js/components/progressbar.js',
 	'/js/components/snackbar.js',
