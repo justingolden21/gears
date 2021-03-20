@@ -3,10 +3,10 @@ const recipes = {
 		bolts: 40,  gears: 100, nuts: 20,  screws: 0,   time: 40,
 	},
 	crafters: {
-		bolts: 20,  gears: 60,  nuts: 0,   screws: 60,  time: 40,
+		bolts: 20,  gears: 60,  nuts: 0,   screws: 80,  time: 60,
 	},
 	warehouses: {
-		bolts: 80,  gears: 0,   nuts: 100, screws: 40,  time: 60,
+		bolts: 80,  gears: 0,   nuts: 100, screws: 40,  time: 80,
 	},
 	converters: {
 		bolts: 0,   gears: 20,  nuts: 20,  screws: 20,  time: 20,
