@@ -18,10 +18,11 @@ let inventory = {
 // todo: display numbers with commas
 // todo: intermediate parts, energy, map showing sprites
 
-
-const warehouse_space = 10_000;
-
 let tick_num = 0;
+let save_interval, tick_interval;
+const tick_speed = 250;
+const warehouse_space = 2_000;
+
 function tick() {
 	produce();
 	display();
@@ -57,7 +58,7 @@ function produce() {
 		u(`#craft-${building}-value`).html(amount);
 		if(crafters_can_craft < 1) continue; // break; // continue so we can set amounts to 0 on next ranges
 		crafters_can_craft -= amount;
-		if(tick_num % 40 == 0) { // only do craft every 10s, but still validate ranges every tick
+		if(tick_num % 40 == 0) { // only do craft every 40 ticks, but still validate ranges every tick
 			if(amount != 0) craft(building, amount);
 			u('#next-craft').html('<p>Time until next craft:</p> ' + getProgressbar(10*1000) ); // show progress bar for 10s
 		}
@@ -73,10 +74,23 @@ function display() {
 			u('.'+key).text(inventory[category][key]);
 		}
 	}
+
+	let max = inventory.buildings.warehouses * warehouse_space;
+	let remaining = max;
+	let html = '';
+	for(let part in inventory.parts) {
+		let used = inventory.parts[part]
+		remaining -= used;
+		html += capitalize(part) + ': ' + used + ' space ' + getStillProgressbar(used/max*100) + '<br>';
+	}
+	html += 'Remaining: ' + remaining + ' space ' + getStillProgressbar(remaining/max*100) + '<br>';
+	u('#storage-breakdown').html(html);
 }
 
 function setup() {
-	let html = getSprite('crafters', 'lg') + '<h3>Crafting</h3><p>Craft:</p>';
+	let html = getSprite('crafters', 'lg') + '<h3>Crafting</h3>';
+	html += '<p>Crafters produce 1 building/40 ticks</p>';
+	html += '<p>Craft:</p>';
 	html += '<select id="craft-amount-select"><option value="1">1</option><option value="10">10</option><option value="100">100</option></select>';
 	for(let building in inventory.buildings) {
 		html += `<button onclick="craft('${building}', parseInt(u('#craft-amount-select').first().value) )">Craft ${building} ${getSprite(building, 'md')}</button>`;
@@ -89,7 +103,9 @@ function setup() {
 	html += '<div id="next-craft" class="w-48 mx-auto"></div>';
 	u('#crafting').html(html);
 
-	html = '<h3 class="font-bold">Delete</h3>';
+	html = getSprite('warehouses', 'lg') + '<h3>Storage</h3><p><span class="warehouses"></span> warehouses</p>';
+	html += `<p>Warehouses store ${warehouse_space} items</p><div id="storage-breakdown"></div>`;
+	html += '<p>Delete:</p>';
 	html += '<input id="delete-input" type="number" value="0">';
 	html += '<select id="delete-select">';
 	for(let part in inventory.parts) {
@@ -101,10 +117,10 @@ function setup() {
 
 	html = '<h3 class="font-bold">Recipes</h3>';
 	for(let recipe in recipes) {
-		html += `<b>${capitalize(recipe)}</b>: `;
+		html += `<br><b>${capitalize(recipe)}</b>: `;
 		for(let part in recipes[recipe]) {
 			if(recipes[recipe][part]==0) continue;
-			html += `${recipes[recipe][part]} ${part} ${getSprite(part, 'sm')}, `;
+			html += `${recipes[recipe][part]} ${part!='time'?part:'ticks'} ${getSprite(part, 'sm')}, `;
 		}
 		html = html.slice(0,-2); // remove trailing ", "
 		html += '<br>';
@@ -126,6 +142,7 @@ function setup() {
 	u('#inventory').append(html);
 
 	html = getSprite('factories', 'lg') + ' <h3>Production</h3><p><span class="factories"></span> factories</p>';
+	html += '<p>Factories produce 1 part/tick or 2 gears/tick</p>';
 	for(let part in inventory.parts) {
 		html += `<span id="produce-${part}-value"></span> <input id="produce-${part}-range" type="range" value="0" step="1" min="0" max="1"> ${getSprite(part, 'md')} ${capitalize(part)}<br>`;
 	}
@@ -146,11 +163,11 @@ function setup() {
 	}
 	setTimeout(loadSettings, 500); // wait for range inputs to render on DOM
 
-	let save_interval = setInterval(()=> {
+	save_interval = setInterval(()=> {
 		setData(inventory);
 		saveSettings();
-	}, 2500);
-	let tick_interval = setInterval(tick, 250);
+	}, tick_speed*10);
+	tick_interval = setInterval(tick, tick_speed);
 	tick();
 }
 window.onload = setup;

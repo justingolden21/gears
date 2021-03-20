@@ -9,3 +9,10 @@ function getProgressbar(ms=1) {
 		<div id="bar-${progressbar_id}" class="progressbar-bar w-0" style="transition: all ${ms/1000}s linear;"></div>
 	</div>`;
 }
+
+function getStillProgressbar(percent, width='8rem') {
+	return `<div class="progressbar mx-auto" style="width: ${width}">
+		<div class="progressbar-bg"></div>
+		<div class="progressbar-bar" style="width: ${percent}%"></div>
+	</div>`;
+}
