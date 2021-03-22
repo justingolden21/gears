@@ -24,16 +24,21 @@ let amount_crafting = 0;
 
 function craft(building, amount=1) {
 	if(!can_craft(building, amount)) {
-		let new_amount = max_craft(building);
-		if(new_amount==0) {
+		amount = max_craft(building);
+		if(amount==0) {
 			showSnackbar('Not enough parts to craft ' + building, 'center');
 		} else {
-			craft(building, new_amount);
+			craft(building, amount);
 		}
 		return;
 	}
-	if(amount_crafting > inventory.buildings.crafters) {
-		showSnackbar('Not enough crafters', 'center');
+	if(amount_crafting + amount > inventory.buildings.crafters) {
+		amount = inventory.buildings.crafters - amount_crafting;
+		if(amount==0) {
+			showSnackbar('Not enough crafters', 'center');
+		} else {
+			craft(building, amount);
+		}
 		return;
 	}
 

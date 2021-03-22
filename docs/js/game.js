@@ -7,7 +7,7 @@ let inventory = {
 	},
 	buildings: {
 		factories: 1,
-		crafters: 0,
+		crafters: 1,
 		warehouses: 1,
 		converters: 1,
 	},
