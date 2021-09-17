@@ -4,7 +4,6 @@ move tabs to side, fix layout
 better icons and ui
 change crafting system to be all at once, no notifs
 display recipes with bars for ingredients
-start on about tab
 pwa
 
 drills get metal, crafters turn metal into parts
