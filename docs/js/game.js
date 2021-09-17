@@ -21,7 +21,7 @@ let inventory = {
 let tick_num = 0;
 let save_interval, tick_interval;
 const tick_speed = 250;
-const warehouse_space = 2_000;
+const warehouse_space = 10_000;
 
 function tick() {
 	produce();
