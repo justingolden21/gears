@@ -1,4 +1,3 @@
-gears 1 notes
 storage should be "inventory"
 move tabs to side, fix layout
 better icons and ui
