@@ -1,6 +1,6 @@
-@import "./components/progressbar.css";
-@import "./components/snackbar.css";
-@import "./components/tabs.css";
+@import './components/progressbar.css';
+@import './components/snackbar.css';
+@import './components/tabs.css';
 
 @tailwind base;
 @tailwind components;
@@ -13,8 +13,14 @@
 	::selection {
 		@apply bg-indigo-100;
 	}
-	*:focus, button:focus {
+	*:focus,
+	button:focus {
 		@apply outline-none ring-2 ring-indigo-300;
+	}
+
+	body {
+		background-color: #544;
+		color: #fff;
 	}
 
 	h1 {
@@ -30,10 +36,10 @@
 		@apply leading-relaxed;
 	}
 	a {
-		@apply text-gray-500 hover:underline;
+		@apply text-gray-400 hover:underline;
 	}
 	button {
-		@apply bg-gray-200 hover:bg-gray-900 hover:text-white p-2 m-2 rounded;
+		@apply bg-gray-700 hover:bg-gray-900 p-2 m-2 rounded;
 	}
 	button.sm {
 		@apply p-1 m-1 text-sm;
@@ -43,6 +49,11 @@
 	}
 	button svg {
 		display: inline;
+	}
+
+	select,
+	input {
+		@apply text-gray-900;
 	}
 
 	img.sprite {
@@ -68,17 +79,20 @@
 }
 
 @layer components {
-
 }
 
-@media (min-width: 640px) { /* sm */
+@media (min-width: 640px) {
+	/* sm */
 }
 
-@media (min-width: 768px) { /* md */
+@media (min-width: 768px) {
+	/* md */
 }
 
-@media (min-width: 1024px) { /* lg */
+@media (min-width: 1024px) {
+	/* lg */
 }
 
-@media (min-width: 1280px) { /* xl */
+@media (min-width: 1280px) {
+	/* xl */
 }

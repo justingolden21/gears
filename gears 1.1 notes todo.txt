@@ -15,8 +15,6 @@ bars to show how much room is in storage, what is  using it
 different items take up different space
 
 
-body bg #4e4141
-
 factory description words?
 show more buildings logarithmically (each building represents 1,10,100)
 
