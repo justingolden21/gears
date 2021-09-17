@@ -5,6 +5,10 @@ change crafting system to be all at once, no notifs
 display recipes with bars for ingredients
 pwa
 
+fix negative space glitch
+
+drag to reorder priority for crafting and production
+
 drills get metal, crafters turn metal into parts
 change part struicture
 factories make buildings
